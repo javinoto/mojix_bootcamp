@@ -2,24 +2,67 @@ import streamlit as st
 import pandas as pd
 # import seaborn as sns
 # import matplotlib.pyplot as plt
+# import plotly_express as px 
 
-st.title('CSV Reader')
-file = st.file_uploader('Upload a csv', type = "csv")
+# Title
 
-if file:
-    df =  pd.read_csv(file)
-    st.dataframe(df)
-    st.markdown('---')
-    fig1 = plt.figure(figsize = (10,4))
-    sns.countplot(x = 'Pclass', data = df)
+st.set_page_config(
+    page_title = 'Discrepancy Dashboard',
+    page_icon = ':bar_chart:',
+    layout = 'wide'
+)
 
-    st.pyplot(fig1)
+# Table
 
-    fig2 = plt.figure(figsize = (10,4))
-    sns.boxplot(
-        x = 'Pclass',
-        y = 'Age',
-        data = df
-    )
+df = pd.read_csv('https://github.com/javinoto/mojix_bootcamp/blob/main/data.csv')
+# st.dataframe(df)
 
-    st.pyplot(fig2)
+
+
+# ---- SIDEBAR ----
+
+st.sidebar.header("FILTER: ")
+
+Product = st.sidebar.multiselect(
+    'Select Retail Product: ',
+    options = df['Retail_Product_Level1Name'].unique(),
+    default = df['Retail_Product_Level1Name'].unique()
+)
+
+Color = st.sidebar.multiselect(
+    'Select Color: ',
+    options = df['Retail_Product_Color'].unique(),
+    default = df['Retail_Product_Color'].unique()
+)
+
+df_selection = df.query(
+    'Retail_Product_Level1Name == @Product & Retail_Product_Color == @Color'
+)
+
+# st.dataframe(df_selection)
+
+
+
+# ---- MAINPAGE ----
+st.title(':bar_chart: Retail Dashboard')
+st.markdown('##')
+
+# ---- DATA ----
+expected = int(df_selection['Retail_SOHQTY'].sum())
+counted = int(df_selection['Retail_CCQTY'].sum())
+discrepancy = int(df_selection['Unders'].sum())
+
+left_column, middle_column, right_column = st.columns(3)
+with left_column:
+    st.subheader('Total Expected:')
+    st.subheader(f'Und {expected:}')
+with middle_column:
+    st.subheader('Total Counted:')
+    st.subheader(f'Und {counted:}')
+with right_column:
+    st.subheader('Under:')
+    st.subheader(f'Und {discrepancy:}')
+
+st.markdown('---')
+
+st.dataframe(df_selection)
