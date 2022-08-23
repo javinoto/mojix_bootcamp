@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-import requests
+import urllib
+import csv
 # import seaborn as sns
 # import matplotlib.pyplot as plt
 # import plotly_express as px 
@@ -22,6 +23,9 @@ url = "https://github.com/javinoto/mojix_bootcamp/blob/main/data.csv"
 file = requests.get(url).content
 df = pd.read_csv(file)
 
+
+file = urllib.urlopen('https://github.com/javinoto/mojix_bootcamp/blob/main/data.csv')
+df = csv.reader(file)
 
 
 # ---- SIDEBAR ----
