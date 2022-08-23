@@ -19,9 +19,9 @@ st.set_page_config(
 # df = pd.read_csv('https://github.com/javinoto/mojix_bootcamp/blob/main/data.csv')
 # st.dataframe(df)
 
-url = "https://github.com/javinoto/mojix_bootcamp/blob/main/data.csv"
-file = requests.get(url).content
-df = pd.read_csv(file)
+# url = "https://github.com/javinoto/mojix_bootcamp/blob/main/data.csv"
+# file = requests.get(url).content
+# df = pd.read_csv(file)
 
 
 file = urllib.urlopen('https://github.com/javinoto/mojix_bootcamp/blob/main/data.csv')
