@@ -14,8 +14,10 @@ st.set_page_config(
 
 # Table
 
-df = pd.read_csv('https://github.com/javinoto/mojix_bootcamp/blob/main/data.csv')
+# df = pd.read_csv('https://github.com/javinoto/mojix_bootcamp/blob/main/data.csv')
 # st.dataframe(df)
+
+df = st.file_uploader('Upload a csv', type = "csv")
 
 
 
