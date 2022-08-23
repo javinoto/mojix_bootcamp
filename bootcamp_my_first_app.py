@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import requests
 # import seaborn as sns
 # import matplotlib.pyplot as plt
 # import plotly_express as px 
@@ -17,7 +18,9 @@ st.set_page_config(
 # df = pd.read_csv('https://github.com/javinoto/mojix_bootcamp/blob/main/data.csv')
 # st.dataframe(df)
 
-df = st.file_uploader('Upload a csv', type = "csv")
+url = "https://github.com/javinoto/mojix_bootcamp/blob/main/data.csv"
+file = requests.get(url).content
+df = pd.read_csv(file)
 
 
 
