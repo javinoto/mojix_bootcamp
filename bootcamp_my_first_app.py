@@ -14,18 +14,8 @@ st.set_page_config(
     layout = 'wide'
 )
 
-# Table
-
+# ---- Table ----
 df = pd.read_csv('./data.csv')
-st.dataframe(df)
-
-# url = "https://github.com/javinoto/mojix_bootcamp/blob/main/data.csv"
-# file = requests.get(url).content
-# df = pd.read_csv(file)
-
-
-# file = urllib.urlopen('https://github.com/javinoto/mojix_bootcamp/blob/main/data.csv')
-# df = csv.reader(file)
 
 
 # ---- SIDEBAR ----
